@@ -43,7 +43,7 @@ attractionRouter.post('/hotel', function(req, res, next) {
     var id = req.param.id;
 });
 // DELETE /days/:id/hotel
-attractionRouter.delete('/hotel', function(req, res, next) {
+attractionRouter.delete('/:id/hotel', function(req, res, next) {
     // deletes the reference of the hotel
     var id = req.param.id;
 });

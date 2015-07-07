@@ -36,7 +36,7 @@ $(document).ready(function() {
             all: data,
             constructor: Hotel,
             addToDay: function(attraction) {
-                $.post('/day/' + currentDay.number + '/hotel', attraction);
+                $.post('/days/' + currentDay.number + '/hotel', attraction);
             }
         });
 
@@ -48,7 +48,7 @@ $(document).ready(function() {
             currentDay.hotel = null;
             // adding AJAX
             $.ajax({
-                url: '/day' + currentDay.number + '/hotel',
+                url: '/days/' + currentDay.number + '/hotel',
                 type: 'DELETE'
             });
         };
