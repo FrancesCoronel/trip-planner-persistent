@@ -15,12 +15,12 @@ dayRouter.get('/', function(req, res, next) {
 // POST /days 
 dayRouter.post('/', function(req, res, next) {
     // creates a new day and serves it as json
-    models.Day
-        .find({})
-        .exec(function(err, days) {
-            var newDay = new Day({});
-            res.json(days);
-        });
+    models.Day.find().count(function(err, numDays){
+            var newDay = new models.Day( {number: numDays+1} )
+            newDay.save(function(err, dayObj){
+                res.json(dayObj)
+            })
+        })
 });
 // GET /days/:id
 // id refers to the day number
