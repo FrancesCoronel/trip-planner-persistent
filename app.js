@@ -2,7 +2,9 @@ var express = require('express'),
 	logger = require('morgan'),
 	bodyParser = require('body-parser'),
 	swig = require('swig'),
-	sassMiddleware = require('node-sass-middleware');
+	sassMiddleware = require('node-sass-middleware'),
+    // Requiring'routes/day.js'
+    days = require('./routes/days');
 
 var app = express();
 
@@ -32,6 +34,9 @@ app.use(express.static(__dirname + '/public'));
 
 // serve root
 app.use('/', require('./routes'));
+
+// Plugging in 'routes/days.js'
+app.use("/days", days);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
