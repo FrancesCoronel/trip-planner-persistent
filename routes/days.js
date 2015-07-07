@@ -55,7 +55,7 @@ var models = require('../models');
                                     })
                                 });
                                 // DELETE /days/:id/hotel
-                                attractionRouter.delete('/:id/hotel', function(req, res, next) {
+                                attractionRouter.delete('/hotel', function(req, res, next) {
                                     // deletes the reference of the hotel
                                     var id = req.param.id;
                                     models.Day.findOneAndUpdate({number: id},function(err, day){
