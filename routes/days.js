@@ -42,11 +42,21 @@ dayRouter.use('/:id', attractionRouter);
 attractionRouter.post('/hotel', function(req, res, next) {
     // creates a reference to the hotel
     var id = req.param.id;
+    models.Day.findOneAndUpdate({number: id},function(err, day){
+        day.hotel = req.body.hotel;
+        day.save();
+        res.send();
+    })
 });
 // DELETE /days/:id/hotel
 attractionRouter.delete('/:id/hotel', function(req, res, next) {
     // deletes the reference of the hotel
     var id = req.param.id;
+    models.Day.findOneAndUpdate({number: id},function(err, day){
+        day.hotel = undefined;
+        day.save();
+        res.send();
+    })
 });
 // POST /days/:id/restaurants
 attractionRouter.post('/restaurants', function(req, res, next) {
