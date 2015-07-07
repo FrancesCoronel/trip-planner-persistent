@@ -18,56 +18,28 @@ $(document).ready(function() {
         currentDay.hotel = this;
     };
 
-    // $.get('/hotels', function(all_hotels){   
-    //     Hotel.prototype = generateAttraction({
-    //         icon: '/images/lodging_0star.png',
-    //         $listGroup: $('#my-hotel .list-group'),
-    //         $all: $('#all-hotels'),
-    //         all: all_hotels,
-    //         constructor: Hotel,
-    //         addToDay: function(attraction) {
-    //             $.post('/days/' + currentDay.number + '/hotel', attraction);
-    //         }
-    //     });
-    // })
-    // Hotel.prototype.delete = function() {
-    //     $.ajax({
-    //         url: '/days/' + currentDay.number + '/hotel',
-    //         type: 'DELETE'
-    //     }, function(res) {
-    //         currentDay.hotel
-    //             .eraseMarker()
-    //             .eraseItineraryItem();
-    //         currentDay.hotel = null;
-    //     });
-    // };
+    $.get('/hotels', function(all_hotels){
+        Hotel.prototype = generateAttraction({
+            icon: '/images/lodging_0star.png',
+            $listGroup: $('#my-hotel .list-group'),
+            $all: $('#all-hotels'),
+            all: all_hotels,
+            constructor: Hotel,
+            addToDay: function(attraction) {
+                $.post('/days/' + currentDay.number + '/hotel', attraction);
+            }
+        });
+    });
 
-    // now using AJAX to make a get request for the data
-   $.get('/hotels', function(data) {
-       Hotel.prototype = generateAttraction({
-           icon: '/images/lodging_0star.png',
-           $listGroup: $('#my-hotel .list-group'),
-           $all: $('#all-hotels'),
-           // all: all_hotels,
-           all: data,
-           constructor: Hotel,
-           addToDay: function(attraction) {
-               $.post('/days/' + currentDay.number + '/hotel', attraction);
-           }
-       });
-
-       // delete hotel
-       Hotel.prototype.delete = function() {
-           currentDay.hotel
-               .eraseMarker()
-               .eraseItineraryItem();
-           currentDay.hotel = null;
-           // adding AJAX
-           $.ajax({
-               url: '/days/' + currentDay.number + '/hotel',
-               type: 'DELETE'
-           });
-       };
-   });
-   
+    Hotel.prototype.delete = function() {
+            $.ajax({
+                url: '/days/' + currentDay.number + '/hotel',
+                type: 'DELETE'
+            }, function(res) {
+                currentDay.hotel
+                    .eraseMarker()
+                    .eraseItineraryItem();
+                currentDay.hotel = null;
+            });
+    };
 });

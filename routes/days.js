@@ -15,7 +15,7 @@ var models = require('../models');
                                                 res.json(result)
                                             })
                                 });
-                                // POST /days 
+                                // POST /days
                                 dayRouter.post('/', function(req, res, next) {
                                     // creates a new day and serves it as json
                                     models.Day.find().count(function(err, numDays){
