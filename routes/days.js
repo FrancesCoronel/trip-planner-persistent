@@ -12,7 +12,7 @@ dayRouter.get('/', function(req, res, next) {
             res.json(days);
         });
 });
-// POST /days
+// POST /days 
 dayRouter.post('/', function(req, res, next) {
     // creates a new day and serves it as json
     models.Day
