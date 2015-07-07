@@ -5,9 +5,12 @@ var models = require('../models');
 
                                 // GET /days
                                 dayRouter.get('/', function(req, res, next) {
+                                    console.log('duuude')
                                     // serves up all days as json
-                                    models.Day.find().sort({number: 1}).populate("hotels")
+                                    models.Day.find().sort({number: 1}).populate("hotels restaurants thingsToDo")
                                             .exec(function(err, result){
+
+                                                console.log(err)
                                                 console.log(result)
                                                 res.json(result)
                                             })
@@ -22,23 +25,25 @@ var models = require('../models');
                                             })
                                         })
                                 });
-// GET /days/:id
-// id refers to the day number
-dayRouter.get('/:id', function(req, res, next) {
-    // serves a particular day as json
-    var id = req.param.id;
-    models.Day.findById(id)
-        .exec(function(err, day) {
-            res.json(day)
-        });
-});
-// DELETE /days/:id
-dayRouter.delete('/:id', function(req, res, next) {
-    // deletes a particular day
-    var id = req.param.id;
-});
+                                // GET /days/:id
+                                // id refers to the day number
+                                dayRouter.get('/:id', function(req, res, next) {
+                                    // serves a particular day as json
+                                    var id = req.param.id;
+                                    models.Day.findById(id)
+                                        .exec(function(err, day) {
+                                            res.json(day)
+                                        });
+                                });
+                                // DELETE /days/:id
+                                dayRouter.delete('/:id', function(req, res, next) {
+                                    // deletes a particular day
+                                    var id = req.param.id;
+                                    models.Day.remove( {number: id} )
+                                    next();
+                                });
 
-dayRouter.use('/:id', attractionRouter);
+                                dayRouter.use('/:id', attractionRouter);
                                 // POST /days/:id/hotel
                                 attractionRouter.post('/hotel', function(req, res, next) {
                                     // creates a reference to the hotel
@@ -81,4 +86,8 @@ attractionRouter.delete('/thingsToDo/:id', function(req, res, next) {
 });
 
 module.exports = dayRouter;
-module.exports = attractionRouter;
+
+
+
+
+

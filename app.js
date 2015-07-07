@@ -36,7 +36,9 @@ app.use(express.static(__dirname + '/public'));
 app.use('/', require('./routes'));
 
 // Plugging in 'routes/days.js'
+// console.log(days);
 app.use("/days", days);
+//app.use("/days", days.attractionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
