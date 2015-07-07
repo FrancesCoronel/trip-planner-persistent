@@ -26,6 +26,13 @@ $(document).ready(function() {
     //     constructor: Hotel
     // });
 
+    // Hotel.prototype.delete = function() {
+    //     currentDay.hotel
+    //         .eraseMarker()
+    //         .eraseItineraryItem();
+    //     currentDay.hotel = null;
+    // };
+
     // now using AJAX to make a get request for the data
     $.get('/hotels', function(data) {
         Hotel.prototype = generateAttraction({
@@ -36,7 +43,7 @@ $(document).ready(function() {
             all: data,
             constructor: Hotel,
             addToDay: function(attraction) {
-                $.post('/day/' + currentDay.number + '/hotel', attraction);
+                $.post('/days/' + currentDay.number + '/hotel', attraction);
             }
         });
 
@@ -48,7 +55,7 @@ $(document).ready(function() {
             currentDay.hotel = null;
             // adding AJAX
             $.ajax({
-                url: '/day' + currentDay.number + '/hotel',
+                url: '/days/' + currentDay.number + '/hotel',
                 type: 'DELETE'
             });
         };

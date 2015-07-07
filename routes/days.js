@@ -23,6 +23,7 @@ dayRouter.post('/', function(req, res, next) {
         });
 });
 // GET /days/:id
+// id refers to the day number
 dayRouter.get('/:id', function(req, res, next) {
     // serves a particular day as json
     var id = req.param.id;
