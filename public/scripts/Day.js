@@ -3,14 +3,14 @@ var Day;
 
 // jQuery loading document
 $(document).ready(function () {
-	Day = function () {
+	Day = function (_id) {
 		this.hotel = null;
 		this.restaurants = [];
 		this.thingsToDo = [];
 		this.number = days.push(this);
-
 		this.buildButton()
 			.drawButton();
+		this._id = _id;
 	};
 
 	// creating a prototype function of buildButton that grabs the button with the number of the current day
@@ -83,9 +83,21 @@ $(document).ready(function () {
 
 	// creating new instance of the object Day
 	$('#add-day').on('click', function () {
-		new Day();
+		//create new day in db with ajax
+		$.post('/days/', function(activities){
+			new Day(activities._id)
+		});
 	});
 
 	// button on click will remvoe day
 	$('#day-title > .remove').on('click', deleteCurrentDay);
 });
+
+
+
+
+
+
+
+
+

@@ -64,13 +64,13 @@ router.get('/thingsToDo', function(req, res, next) {
 
 // adding Day router
 
-router.get('/days', function(req, res, next) {
-    models.Day
-        .find({})
-        .exec(function(err, days) {
-            if (err) return next(err);
-            res.json(days);
-        });
-});
+// router.get('/days', function(req, res, next) {
+//     models.Day
+//         .find({})
+//         .exec(function(err, days) {
+//             if (err) return next(err);
+//             res.json(days);
+//         });
+// });
 
 module.exports = router;

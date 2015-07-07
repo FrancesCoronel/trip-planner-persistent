@@ -18,46 +18,28 @@ $(document).ready(function() {
         currentDay.hotel = this;
     };
 
-    // Hotel.prototype = generateAttraction({
-    //     icon: '/images/lodging_0star.png',
-    //     $listGroup: $('#my-hotel .list-group'),
-    //     $all: $('#all-hotels'),
-    //     all: all_hotels,
-    //     constructor: Hotel
-    // });
-
-    // Hotel.prototype.delete = function() {
-    //     currentDay.hotel
-    //         .eraseMarker()
-    //         .eraseItineraryItem();
-    //     currentDay.hotel = null;
-    // };
-
-    // now using AJAX to make a get request for the data
-    $.get('/hotels', function(data) {
+    $.get('/hotels', function(all_hotels){   
         Hotel.prototype = generateAttraction({
             icon: '/images/lodging_0star.png',
             $listGroup: $('#my-hotel .list-group'),
             $all: $('#all-hotels'),
-            // all: all_hotels,
-            all: data,
+            all: all_hotels,
             constructor: Hotel,
             addToDay: function(attraction) {
                 $.post('/days/' + currentDay.number + '/hotel', attraction);
             }
         });
+    })
 
-        // delete hotel
-        Hotel.prototype.delete = function() {
-            currentDay.hotel
-                .eraseMarker()
-                .eraseItineraryItem();
-            currentDay.hotel = null;
-            // adding AJAX
+    Hotel.prototype.delete = function() {
             $.ajax({
                 url: '/days/' + currentDay.number + '/hotel',
                 type: 'DELETE'
+            }, function(res) {
+                currentDay.hotel
+                    .eraseMarker()
+                    .eraseItineraryItem();
+                currentDay.hotel = null;
             });
-        };
-    });
+    };
 });
