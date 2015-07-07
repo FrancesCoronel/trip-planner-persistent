@@ -26,6 +26,13 @@ $(document).ready(function() {
     //     constructor: Hotel
     // });
 
+    // Hotel.prototype.delete = function() {
+    //     currentDay.hotel
+    //         .eraseMarker()
+    //         .eraseItineraryItem();
+    //     currentDay.hotel = null;
+    // };
+
     // now using AJAX to make a get request for the data
     $.get('/hotels', function(data) {
         Hotel.prototype = generateAttraction({
